@@ -3,9 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react"; // Icons ke liye
+import Appointment from "../Appointmentpage/Appointment";
+
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+{/* Popup code */}
+  const [showPopup, setShowPopup] = useState(false);
+  {/* Popup code */}
+
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -13,12 +19,13 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
-    { name: "Contact", href: "/contact" },
+    { name: "About", href: "#about" },
+    { name: "Services", href: "#services" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
+    <>
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
@@ -40,8 +47,12 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <button className="bg-blue-300 py-2 px-3 text-white rounded-sm">Book Now Appoinment</button>
+           <button  onClick={() => setShowPopup(true)} className="bg-blue-300 hover:bg-blue-400 active:scale-[0.98] shadow-md hover:shadow-lg transition-all duration-200 text-base py-2 px-3 text-white rounded-sm">Book Now Appoinment</button> 
           </div>
+
+
+
+
 
           {/* Mobile Menu Button (Sirf mobile view me dikhega) */}
           <div className="md:hidden flex items-center">
@@ -73,11 +84,42 @@ export default function Navbar() {
             ))}
 
 
-<button className="bg-blue-400 py-2 px-5 text-white rounded-lg ">Book Now Appoinment</button>
+<button onClick={() => {
+    setIsOpen(false);      // मोबाइल मेनू बंद करने के लिए
+    setShowPopup(true);    // पॉपअप खोलने के लिए
+  }} className="bg-blue-400 py-2 px-5 text-white rounded-lg ">Book Now Appoinment</button> 
 
           </div>
         </div>
       )}
     </nav>
+
+
+{/* जब showPopup true होगा, तभी यह हिस्सा दिखेगा */}
+{showPopup && (
+  <div className="fixed inset-0 bg-black/80  flex justify-center items-center z-50 p-4">
+    <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative p-6">
+      
+      {/* पॉपअप बंद करने का बटन */}
+      <button 
+        onClick={() => setShowPopup(false)}
+        className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
+      >
+        <X className="h-6 w-6" />
+      </button>
+
+      {/* आपका अपॉइंटमेंट फॉर्म यहाँ दिखेगा */}
+      <div className="mt-4">
+        <Appointment />
+      </div>
+      
+    </div>
+  </div>
+)}
+
+
+</>
+
+
   );
 }

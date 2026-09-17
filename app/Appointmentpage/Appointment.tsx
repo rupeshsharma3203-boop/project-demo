@@ -31,7 +31,7 @@ export default function Appointment() {
   }
 
   return (
-    <div className="bg-white p-6 sm:p-10 rounded-2xl border border-slate-200/80 shadow-md max-w-xl mx-auto">
+    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-md max-w-xl mx-auto">
       <div className="mb-6">
         <h3 className="text-xl font-bold text-slate-900">Book Patient Slot</h3>
         <p className="text-xs text-slate-500 mt-1">Sahi details bharein taaki doctor ke sath slot jaldi confirm ho sake.</p>

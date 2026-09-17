@@ -1,8 +1,17 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
+import { X } from "lucide-react";
+import Appointment from "../Appointmentpage/Appointment";
 import { Activity, ShieldCheck, Clock, Award } from "lucide-react";
 
+
 export default function Herosection() {
+  {/* Popup code */}
+  const [showPopup, setShowPopup] = useState(false);
+  {/* Popup code */}
   return (
+    <>
     <section className="relative bg-gradient-to-br from-slate-50 to-blue-50/50 py-16 lg:py-24 overflow-hidden">
       {/* Decorative Background Blur */}
       <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl pointer-events-none" />
@@ -29,7 +38,7 @@ export default function Herosection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
-              <button className="bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold py-3.5 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-base">
+              <button onClick={() => setShowPopup(true)} className="bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold py-3.5 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-base">
                 Book Appointment Now
               </button>
               <Link 
@@ -82,5 +91,32 @@ export default function Herosection() {
         </div>
       </div>
     </section>
+
+
+{/* जब showPopup true होगा, तभी यह हिस्सा दिखेगा */}
+{showPopup && (
+  <div className="fixed inset-0 bg-black/80  flex justify-center items-center z-50 p-4">
+    <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative p-6">
+      
+      {/* पॉपअप बंद करने का बटन */}
+      <button 
+        onClick={() => setShowPopup(false)}
+        className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
+      >
+        <X className="h-6 w-6" />
+      </button>
+
+      {/* आपका अपॉइंटमेंट फॉर्म यहाँ दिखेगा */}
+      <div className="mt-4">
+        <Appointment />
+      </div>
+      
+    </div>
+  </div>
+)}
+
+</>
+
+
   );
 }
