@@ -75,7 +75,7 @@ export default function Herosection() {
             <div className="relative w-full max-w-md sm:max-w-lg aspect-square lg:aspect-auto lg:h-[500px] rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-slate-200">
               {/* Client yahan doctor ki real photo ya stock medical photo laga sakta hai */}
               <img 
-                src="https://unsplash.com" 
+                src="doctor.jpg" 
                 alt="Orthopedic Doctor Consult" 
                 className="w-full h-full object-cover"
               />
